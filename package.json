@@ -16,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/hakatashi/EEIC2017-infovis/issues"
   },
-  "homepage": "https://github.com/hakatashi/EEIC2017-infovis#readme"
+  "homepage": "https://github.com/hakatashi/EEIC2017-infovis#readme",
+  "devDependencies": {
+    "@hakatashi/eslint-config": "^1.1.1",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "d3": "^4.11.0",
+    "eslint": "^4.9.0",
+    "eslint-plugin-react": "^7.4.0",
+    "webpack": "^3.8.1"
+  }
 }
