@@ -27,27 +27,36 @@ window.addEventListener('unhandledrejection', (error) => {
 	const circles = svg.selectAll('circle').data(data)
 		.enter().append('circle');
 
+	const bars = svg.selectAll('rect').data(data)
+		.enter().append('rect');
+
 	const texts = svg.selectAll('text').data(data)
 		.enter().append('text');
 
 	const path = svg.append('path');
 
-	const line = D3.line()
-		.x(({score}) => (score * 10) + 50)
-		.y(() => 100);
-
 	circles
-		.attr('cx', ({score}) => (score * 10) + 50)
+		.attr('cx', (_, index) => index * 70 + 50)
 		.attr('cy', 100)
 		.attr('r', ({score}) => score / 2)
 		.attr('fill', 'black');
 
+	bars
+		.attr('x', (_, index) => index * 70 + 35)
+		.attr('y', ({score}) => 400 - score * 2)
+		.attr('height', ({score}) => score * 2)
+		.attr('width', 30);
+
 	texts
 		.text(({group}) => group)
-		.attr('x', ({score}) => (score * 10) + 50)
+		.attr('x', (_, index) => (index * 70) + 50)
 		.attr('y', 30)
 		.attr('fill', 'black')
 		.attr('text-anchor', 'middle');
+
+	const line = D3.line()
+		.x((_, index) => (index * 70) + 50)
+		.y(({score}) => 600 - score);
 
 	path
 		.attr('d', line(data))
