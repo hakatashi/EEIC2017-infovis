@@ -4,6 +4,7 @@
   "description": "EEIC 2017年度後期実験「情報可視化とデータ解析」作業用リポジトリ",
   "main": "index.js",
   "scripts": {
+    "build": "cd 01 && webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,8 +20,10 @@
   "homepage": "https://github.com/hakatashi/EEIC2017-infovis#readme",
   "devDependencies": {
     "@hakatashi/eslint-config": "^1.1.1",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "d3": "^4.11.0",
     "eslint": "^4.9.0",
