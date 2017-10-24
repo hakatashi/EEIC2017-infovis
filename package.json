@@ -32,5 +32,9 @@
     "util.promisify": "^1.0.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"
+  },
+  "dependencies": {
+    "common-tags": "^1.4.0",
+    "d3-selection-multi": "^1.0.1"
   }
 }
