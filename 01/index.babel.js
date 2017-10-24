@@ -38,17 +38,18 @@ window.addEventListener('unhandledrejection', (error) => {
 	circles
 		.attr('cx', (_, index) => index * 70 + 50)
 		.attr('cy', 100)
-		.attr('r', ({score}) => score / 2)
-		.attr('fill', 'black');
+		.attr('r', ({Value}) => Value / 2)
+		.attr('fill', ({Value}) => `rgb(${Math.floor(Value / 100 * 255)}, 0, 0)`);
 
 	bars
 		.attr('x', (_, index) => index * 70 + 35)
-		.attr('y', ({score}) => 400 - score * 2)
-		.attr('height', ({score}) => score * 2)
-		.attr('width', 30);
+		.attr('y', ({Value}) => 400 - Value * 2)
+		.attr('height', ({Value}) => Value * 2)
+		.attr('width', 30)
+		.attr('fill', ({Value}) => `rgb(${Math.floor(Value / 100 * 255)}, 0, 0)`);
 
 	texts
-		.text(({group}) => group)
+		.text(({Label}) => Label)
 		.attr('x', (_, index) => (index * 70) + 50)
 		.attr('y', 30)
 		.attr('fill', 'black')
@@ -56,7 +57,7 @@ window.addEventListener('unhandledrejection', (error) => {
 
 	const line = D3.line()
 		.x((_, index) => (index * 70) + 50)
-		.y(({score}) => 600 - score);
+		.y(({Value}) => 600 - Value);
 
 	path
 		.attr('d', line(data))
