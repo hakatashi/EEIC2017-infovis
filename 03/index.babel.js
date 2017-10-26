@@ -65,16 +65,16 @@ window.addEventListener('unhandledrejection', (error) => {
 		const increase = increaseMap.get(name);
 		if (increase > 1) {
 			return `rgb(${[
+				Math.floor(increaseColorScale(increase - 1)),
+				Math.floor(increaseColorScale(increase - 1)),
 				255,
-				Math.floor(increaseColorScale(increase - 1)),
-				Math.floor(increaseColorScale(increase - 1)),
 			].join(',')})`;
 		}
 
 		return `rgb(${[
-			Math.floor(increaseColorScale(1 - increase)),
-			Math.floor(increaseColorScale(1 - increase)),
 			255,
+			Math.floor(increaseColorScale(1 - increase)),
+			Math.floor(increaseColorScale(1 - increase)),
 		].join(',')})`;
 	};
 
