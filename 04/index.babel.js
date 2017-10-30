@@ -167,7 +167,7 @@ window.addEventListener('unhandledrejection', (error) => {
 	});
 
 	companyText.on('click', ({name: clickedName}) => {
-		graphSvg.selectAll('circle').attrs({
+		graphSvg.selectAll('circle, text').attrs({
 			opacity: ({name: targetName}) => (
 				(
 					targetName === clickedName ||
@@ -186,7 +186,7 @@ window.addEventListener('unhandledrejection', (error) => {
 
 	[nodeCircle, nodeText].forEach((item) => {
 		item.on('click', ({name: clickedName}) => {
-			graphSvg.selectAll('text').attrs({
+			companySvg.selectAll('text').attrs({
 				opacity: ({name: targetName}) => (
 					(
 						targetName === clickedName ||
