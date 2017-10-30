@@ -3,8 +3,6 @@ require('babel-polyfill');
 const D3 = require('D3');
 require('d3-selection-multi');
 
-const {stripIndent} = require('common-tags');
-
 process.on('unhandledRejection', (error) => {
 	throw error;
 });

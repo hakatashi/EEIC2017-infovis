@@ -190,10 +190,10 @@ window.addEventListener('unhandledrejection', (error) => {
 				opacity: ({name: targetName}) => (
 					(
 						targetName === clickedName ||
-					links.some(({source, target}) => (
-						(source.name === clickedName && target.name === targetName) ||
-						(source.name === targetName && target.name === clickedName)
-					))
+						links.some(({source, target}) => (
+							(source.name === clickedName && target.name === targetName) ||
+							(source.name === targetName && target.name === clickedName)
+						))
 					) ? 1 : 0.3
 				),
 			});
