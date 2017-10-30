@@ -69,6 +69,8 @@ window.addEventListener('unhandledrejection', (error) => {
 	const width = 600;
 	const height = 500;
 
+	const colorScale = D3.scaleOrdinal(D3.schemeCategory10);
+
 	const companySvg = D3.select('#company').append('svg').attrs({
 		width: 150,
 		height,
@@ -94,7 +96,7 @@ window.addEventListener('unhandledrejection', (error) => {
 
 	const link = graphSvg.selectAll('line').data(links)
 		.enter().append('line').attrs({
-			stroke: 'lightgrey',
+			stroke: ({type}) => colorScale(type),
 			'stroke-width': 2,
 		});
 
@@ -124,14 +126,14 @@ window.addEventListener('unhandledrejection', (error) => {
 	const node = graphSvg.selectAll('circle').data(nodes)
 		.enter().append('g').attrs({class: 'node_group'}).call(dragHandler);
 
-	graphSvg.selectAll('.node_group').append('circle').attrs({
+	const nodeCircle = graphSvg.selectAll('.node_group').append('circle').attrs({
 		stroke: 'black',
 		fill: 'black',
 		class: ({id}) => `node_${id}`,
 		r: 5,
 	});
 
-	graphSvg.selectAll('.node_group').append('text').attrs({
+	const nodeText = graphSvg.selectAll('.node_group').append('text').attrs({
 		stroke: 'none',
 		fill: 'black',
 	}).text(({name}) => name);
@@ -162,5 +164,39 @@ window.addEventListener('unhandledrejection', (error) => {
 
 	companyText.on('mouseout', () => {
 		graphSvg.selectAll('circle').attrs({fill: 'black'});
+	});
+
+	companyText.on('click', ({name: clickedName}) => {
+		graphSvg.selectAll('circle').attrs({
+			opacity: ({name: targetName}) => (
+				(
+					targetName === clickedName ||
+					links.some(({source, target}) => (
+						(source.name === clickedName && target.name === targetName) ||
+						(source.name === targetName && target.name === clickedName)
+					))
+				) ? 1 : 0.3
+			),
+		});
+
+		graphSvg.selectAll('line').attrs({
+			opacity: ({source}) => source.name === clickedName ? 1 : 0.2,
+		});
+	});
+
+	[nodeCircle, nodeText].forEach((item) => {
+		item.on('click', ({name: clickedName}) => {
+			graphSvg.selectAll('text').attrs({
+				opacity: ({name: targetName}) => (
+					(
+						targetName === clickedName ||
+					links.some(({source, target}) => (
+						(source.name === clickedName && target.name === targetName) ||
+						(source.name === targetName && target.name === clickedName)
+					))
+					) ? 1 : 0.3
+				),
+			});
+		});
 	});
 })();
